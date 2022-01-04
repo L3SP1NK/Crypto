@@ -58,7 +58,7 @@ ETH()
 XMR()
 {
 		## Monero (Kraken).
-		echo -e "  ${RED}${BOLD}XMR${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
+		echo -e "  ${BOLD}XMR${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
