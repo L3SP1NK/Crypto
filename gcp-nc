@@ -71,15 +71,13 @@ BNB()
 }
 
 REQUIREMENTS="curl perl awk sed jq"
-
-which ${REQUIREMENTS} > /dev/null
-if [[ ${?} -eq "0" ]]
+if ! which ${REQUIREMENTS} > /dev/null
 	then
+		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
+		exit 1
+	else
 		BTC
 		ETH
 		XMR
 		BNB
-	else
-		echo "To run this program, you need the following packages installed: ${REQUIREMENTS}\nExiting..."
-		exit 1
 fi

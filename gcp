@@ -6,6 +6,7 @@
 ## - Kraken
 ## - Coinbase
 
+## Set colors.
 RC="\e[0m"
 BOLD="\e[1m"
 RED="\e[31m"
@@ -24,13 +25,13 @@ BSC_API="CQ21TRV2YCQ3WV9EA4TSR5BRD12P2TDG16"
 BTC()
 {
 		## Bitcoin (Coinbase).
-#		echo -e "  ${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
+#		echo -e "  ${YELLOW}BTC: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
 #		| cut -d\: -f5 \
 #		| cut -d\" -f2)" \
 #		| cut -d '.' -f 1
 
 		## Bitcoin (Kraken).
-		echo -e "  ${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
+		echo -e "  ${YELLOW}BTC:${RC} ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
@@ -41,13 +42,13 @@ BTC()
 ETH()
 {
 		## Etherum (Coinbase).
-#		echo -e "  ${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
+#		echo -e "  ${BLUE}ETH:${RC} ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
 #		| cut -d\: -f5 \
 #		| cut -d\" -f2)" \
 #		| cut -d '.' -f 1
 
 		## Etherum (Kraken).
-		echo -e "  ${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
+		echo -e "  ${BLUE}${BOLD}ETH:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
@@ -58,7 +59,7 @@ ETH()
 XMR()
 {
 		## Monero (Kraken).
-		echo -e "  ${BOLD}XMR${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
+		echo -e "  ${BOLD}XMR:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
@@ -69,7 +70,7 @@ XMR()
 BNB()
 {
 		## Binance coin (Binance Smart Chain).
-		echo -e "  ${YELLOW}${BOLD}BNB${RC}: ${GREEN}\$${RC}$(curl -s "${BSC_URL}${BSC_API}" \
+		echo -e "  ${YELLOW}${BOLD}BNB:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${BSC_URL}${BSC_API}" \
 		| cut -d ',' -f 5 \
 		| cut -d : -f 2 \
 		| sed 's/"//g' \
@@ -77,15 +78,13 @@ BNB()
 }
 
 REQUIREMENTS="curl perl awk sed jq"
-
-which ${REQUIREMENTS} > /dev/null
-if [[ ${?} -eq "0" ]]
+if ! which ${REQUIREMENTS} > /dev/null
 	then
+		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
+		exit 1
+	else
 		BTC
 		ETH
 		XMR
 		BNB
-	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\n${RC}${RED}Exiting...${RC}"
-		exit 1
 fi
