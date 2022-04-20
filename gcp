@@ -1,6 +1,7 @@
 #!/bin/bash
-## GCP: Get crypto prices.
+## GCP: Get Crypto Prices.
 ## Get the prices of the most popular cryptocurrencies.
+
 ## Data from:
 ## - Binance
 ## - Kraken
