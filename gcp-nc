@@ -9,7 +9,7 @@
 ## - Kraken
 ## - Coinbase
 
-
+DATE=$(date "+%A %d %B %Y, %T")
 COINBASE_URL="https://api.coinbase.com/v2/prices/"
 KRAKEN_URL='https://api.kraken.com/0/public/Ticker?pair='
 BSC_URL='https://api.bscscan.com/api?module=stats&action=bnbprice&apikey='
@@ -76,9 +76,10 @@ if ! which ${REQUIREMENTS} > /dev/null
 	then
 		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
 		exit 1
-	else
-		BTC
-		ETH
-		XMR
-		BNB
 fi
+
+echo -e "${DATE}\n"
+BTC
+ETH
+XMR
+BNB

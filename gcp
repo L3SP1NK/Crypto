@@ -17,6 +17,7 @@ BLUE="\e[34m"
 CYAN="\e[36m"
 GREY="\e[37m"
 
+DATE=$(date "+%A %d %B %Y, %T")
 COINBASE_URL="https://api.coinbase.com/v2/prices/"
 KRAKEN_URL='https://api.kraken.com/0/public/Ticker?pair='
 BSC_URL='https://api.bscscan.com/api?module=stats&action=bnbprice&apikey='
@@ -26,13 +27,13 @@ BSC_API="CQ21TRV2YCQ3WV9EA4TSR5BRD12P2TDG16"
 BTC()
 {
 		## Bitcoin (Coinbase).
-#		echo -e "  ${YELLOW}BTC: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
+#		echo -e "${YELLOW}BTC: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
 #		| cut -d\: -f5 \
 #		| cut -d\" -f2)" \
 #		| cut -d '.' -f 1
 
 		## Bitcoin (Kraken).
-		echo -e "  ${YELLOW}BTC:${RC} ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
+		echo -e "${YELLOW}BTC:${RC} ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
@@ -43,13 +44,13 @@ BTC()
 ETH()
 {
 		## Etherum (Coinbase).
-#		echo -e "  ${BLUE}ETH:${RC} ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
+#		echo -e "${BLUE}ETH:${RC} ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
 #		| cut -d\: -f5 \
 #		| cut -d\" -f2)" \
 #		| cut -d '.' -f 1
 
 		## Etherum (Kraken).
-		echo -e "  ${BLUE}${BOLD}ETH:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
+		echo -e "${BLUE}${BOLD}ETH:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
@@ -60,7 +61,7 @@ ETH()
 XMR()
 {
 		## Monero (Kraken).
-		echo -e "  ${BOLD}XMR:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
+		echo -e "${BOLD}XMR:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
 		| jq \
 		| awk "/a/ { getline; print ${1};}" \
 		| sed 's/\("\s*\|,\)//g' \
@@ -71,7 +72,7 @@ XMR()
 BNB()
 {
 		## Binance coin (Binance Smart Chain).
-		echo -e "  ${YELLOW}${BOLD}BNB:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${BSC_URL}${BSC_API}" \
+		echo -e "${YELLOW}${BOLD}BNB:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${BSC_URL}${BSC_API}" \
 		| cut -d ',' -f 5 \
 		| cut -d : -f 2 \
 		| sed 's/"//g' \
@@ -83,9 +84,11 @@ if ! which ${REQUIREMENTS} > /dev/null
 	then
 		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
 		exit 1
-	else
-		BTC
-		ETH
-		XMR
-		BNB
 fi
+
+
+echo -e "${CYAN}${DATE}${RC}\n"
+BTC
+ETH
+XMR
+BNB
