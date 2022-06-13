@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## GCP: Get Crypto Prices.
 ## Get the prices of the most popular cryptocurrencies.
 

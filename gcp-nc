@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## GCP-NC: Get crypto prices, no colors.
 ## Copy of  the "gcp" script, without colors.
 
