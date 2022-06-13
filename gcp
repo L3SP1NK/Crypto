@@ -26,64 +26,64 @@ BSC_API="CQ21TRV2YCQ3WV9EA4TSR5BRD12P2TDG16"
 
 BTC()
 {
-		## Bitcoin (Coinbase).
-#		echo -e "${YELLOW}BTC: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
-#		| cut -d\: -f5 \
-#		| cut -d\" -f2)" \
-#		| cut -d '.' -f 1
+        ## Bitcoin (Coinbase).
+#        echo -e "${YELLOW}BTC: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
+#        | cut -d\: -f5 \
+#        | cut -d\" -f2)" \
+#        | cut -d '.' -f 1
 
-		## Bitcoin (Kraken).
-		echo -e "${YELLOW}BTC:${RC} ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
-		| jq \
-		| awk "/a/ { getline; print ${1};}" \
-		| sed 's/\("\s*\|,\)//g' \
-		| sed 's/ //g' \
-		| cut -d '.' -f 1 )"
+        ## Bitcoin (Kraken).
+        echo -e "${YELLOW}BTC:${RC} ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
+        | jq \
+        | awk "/a/ { getline; print ${1};}" \
+        | sed 's/\("\s*\|,\)//g' \
+        | sed 's/ //g' \
+        | cut -d '.' -f 1 )"
 }
 
 ETH()
 {
-		## Etherum (Coinbase).
-#		echo -e "${BLUE}ETH:${RC} ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
-#		| cut -d\: -f5 \
-#		| cut -d\" -f2)" \
-#		| cut -d '.' -f 1
+        ## Etherum (Coinbase).
+#        echo -e "${BLUE}ETH:${RC} ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
+#        | cut -d\: -f5 \
+#        | cut -d\" -f2)" \
+#        | cut -d '.' -f 1
 
-		## Etherum (Kraken).
-		echo -e "${BLUE}${BOLD}ETH:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
-		| jq \
-		| awk "/a/ { getline; print ${1};}" \
-		| sed 's/\("\s*\|,\)//g' \
-		| sed 's/ //g' \
-		| cut -d '.' -f 1 )"
+        ## Etherum (Kraken).
+        echo -e "${BLUE}${BOLD}ETH:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
+        | jq \
+        | awk "/a/ { getline; print ${1};}" \
+        | sed 's/\("\s*\|,\)//g' \
+        | sed 's/ //g' \
+        | cut -d '.' -f 1 )"
 }
 
 XMR()
 {
-		## Monero (Kraken).
-		echo -e "${BOLD}XMR:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
-		| jq \
-		| awk "/a/ { getline; print ${1};}" \
-		| sed 's/\("\s*\|,\)//g' \
-		| sed 's/ //g' \
-		| cut -d '.' -f 1 )"
+        ## Monero (Kraken).
+        echo -e "${BOLD}XMR:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
+        | jq \
+        | awk "/a/ { getline; print ${1};}" \
+        | sed 's/\("\s*\|,\)//g' \
+        | sed 's/ //g' \
+        | cut -d '.' -f 1 )"
 }
 
 BNB()
 {
-		## Binance coin (Binance Smart Chain).
-		echo -e "${YELLOW}${BOLD}BNB:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${BSC_URL}${BSC_API}" \
-		| cut -d ',' -f 5 \
-		| cut -d : -f 2 \
-		| sed 's/"//g' \
-		| cut -d '.' -f 1 )"
+        ## Binance coin (Binance Smart Chain).
+        echo -e "${YELLOW}${BOLD}BNB:${RC} ${GREEN}\$${RC}${RC}$(curl -s "${BSC_URL}${BSC_API}" \
+        | cut -d ',' -f 5 \
+        | cut -d : -f 2 \
+        | sed 's/"//g' \
+        | cut -d '.' -f 1 )"
 }
 
 REQUIREMENTS="curl perl awk sed jq"
 if ! which ${REQUIREMENTS} > /dev/null
-	then
-		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
-		exit 1
+    then
+        echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
+        exit 1
 fi
 
 
