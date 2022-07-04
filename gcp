@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-## GCP: Get crypto prices.
+## Get Crypto Prices.
 ## Data from: binance, kraken, coinbase.
+
 RED="\e[31m"
 RC="\e[0m"
+
 COINBASE_URL="https://api.coinbase.com/v2/prices/"
 KRAKEN_URL='https://api.kraken.com/0/public/Ticker?pair='
 BSCSCAN_URL='https://api.bscscan.com/api?module=stats&action=bnbprice&apikey='
